@@ -1,0 +1,62 @@
+
+<header th:fragment="header">
+    <div style="background:#c0a16b" class="navbar navbar-default navbar-static-top" role="navigation">
+        <div  class="container" >
+            <div class="navbar-header">
+                <a th:href="@{/}" class="navbar-brand" style="color: #0f0f0f">CRASH BLOG</a>
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+
+                    <li>
+                        <form style="position: absolute; top:12px; left:10%;margin-left: -170px" action="" method="get">
+                            <input  type="text" name="search_text" id="search_text" placeholder="Search by title,author"/>
+                        </form>
+                    </li>
+
+                    <li class="dropdown" sec:authorize="hasRole('ADMIN')">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="color: black">Admin<span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a th:href="@{/admin/categories/}" style="color: black">Categories</a></li>
+                            <li><a th:href="@{/admin/users/}" style="color: black">Users</a></li>
+                        </ul>
+                    </li>
+
+
+                    <li sec:authorize="isAuthenticated()">
+                        <a th:href="@{/article/create}" style="color: black">
+                            Create Article
+                        </a>
+                    </li>
+                    <li sec:authorize="isAuthenticated()">
+                        <a th:href="@{/profile}" style="color: black">
+                            My Profile
+                        </a>
+                    </li>
+                    <li sec:authorize="isAuthenticated()">
+                        <a th:href="@{/logout}" style="color: black">
+                            Logout
+                        </a>
+                    </li>
+
+                    <li sec:authorize="isAnonymous()">
+                        <a th:href="@{/register}" style="color: black">
+                            REGISTER
+                        </a>
+                    </li>
+                    <li sec:authorize="isAnonymous()">
+                        <a th:href="@{/login}">
+                            LOGIN
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</header>	 

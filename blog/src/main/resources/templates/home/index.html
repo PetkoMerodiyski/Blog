@@ -1,0 +1,56 @@
+<main>
+    <div  class="container body-content">
+
+        <!--Old view of categories-->
+        <!--<div class="row" th:fragment="padashtoMenu">
+            <div class="col-md-6" th:each="category : ${categories}">
+                        <a th:href="@{/category/{id}(id=${category.id})}" th:text="${category.name}"></a>
+            </div>
+        </div>-->
+
+        <div style="display: none" id="gosho0" class="post-preview">
+            <a class="vruzka">
+                <h2 class="post-title">
+                </h2>
+                <h3 class="post-subtitle">
+                </h3>
+                <p class="tags">
+                    <a class="btn btn-default btn-xs" ></a>
+                </p>
+            </a>
+            <p class="post-meta">Posted by
+                <a class="author" href="#"></a></p>
+        </div>
+
+        <div class="container">
+            <form class="col-lg-8 col-md-10 mx-auto" action="" method="get">
+                <input  type="text" name="search_text" id="search_text" placeholder="Search by title,author"/>
+            </form>
+
+            <a id="search_clone_index" style="display: none;" href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h4>List group item heading</h4>
+                </div>
+                <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                <p1 class="mb-1" style="font-size: small"> author </p1>
+                <br/>
+                <small class="text-muted">3 days ago</small>
+            </a>
+
+            <div class="col-lg-8 col-md-10 mx-auto" id="search_result">
+            </div>
+
+            <div class="row">
+                <div class="col-lg-8 col-md-10 mx-auto">
+                    <div id="articlesContainer2" class="post-preview">
+                    </div>
+                    <div id="numPages" th:attr="numOfPages=${numberOfPages}" class="clearfix">
+                        <a id="previousInIndex" class="btn btn-secondary float-left" href="#">&larr; Newer Posts</a>
+                        <a id="nextInIndex" class="btn btn-secondary float-right" href="#">Older Posts &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</main>

@@ -1,0 +1,99 @@
+<div th:include="user/login"></div>
+<div th:include="user/register"></div>
+<script th:src="@{/scripts/jquery-3.2.1.min.js}"></script>
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+    <div class="container">
+
+        <a class="navbar-brand" href="/">Start Bootstrap</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            Menu
+            <i class="fa fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+
+                <li class="dropdown nav-item" sec:authorize="hasRole('ADMIN')">
+                    <a href="#" class="nav-link" data-toggle="dropdown" role="button" aria-expanded="false" >Admin<span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a th:href="@{/admin/categories/}" style="color: black">Categories</a></li>
+                        <li><a th:href="@{/admin/users/}" style="color: black">Users</a></li>
+                    </ul>
+                </li>
+
+                <div id="category0">
+                        <a id="connectionWithCategory">
+                            <h6 id="categoryName"></h6>
+                        </a>
+                </div>
+
+                <li class="dropdown nav-item">
+                    <a href="#" class="nav-link" id="buttonForCategories" data-toggle="dropdown" role="button" aria-expanded="false" >Categories<span class="caret"></span></a>
+                    <ul class="dropdown-menu" id="categoryContainer" role="menu">
+                    </ul>
+                </li>
+
+                <li sec:authorize="isAuthenticated()" class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+                <li sec:authorize="isAuthenticated()" class="nav-item">
+                    <a class="nav-link" th:href="@{/profile}">My Profile</a>
+                </li>
+                <li sec:authorize="isAuthenticated()" class="nav-item">
+                    <a class="nav-link" th:href="@{/article/create}">Create Article</a>
+                </li>
+                <li sec:authorize="isAnonymous()" class="nav-item">
+                    <a class="nav-link" href="about.html">About</a>
+                </li>
+                <li sec:authorize="isAuthenticated()" class="nav-item">
+                    <a class="nav-link" href="contact.html">Contact</a>
+                </li>
+                <li sec:authorize="isAnonymous()" class="nav-item">
+                    <a class="nav-link" href="#" id="loginTest">Login</a>
+                </li>
+                <li sec:authorize="isAuthenticated()" class="nav-item">
+                    <a class="nav-link" th:href="@{/logout}">Logout</a>
+                </li>
+                <li sec:authorize="isAnonymous()" class="nav-item">
+                    <a class="nav-link" href="#" onclick="document.getElementById('register01').style.display='block'" style="width:auto;">Register</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <script src="/scripts/login.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            var btn=document.getElementById("buttonForCategories");
+            btn.onclick=function() {
+                $.ajax({
+                    type: "GET",
+                    contentType: "application/json",
+                    url: "/getCategories",
+                    dataType: "json",
+                    success: function (categories) {
+                        $("#categoryContainer").empty();
+                        showCategories(categories);
+                    },
+                    error: function (e) {
+                        console.log("ERROR", e);
+                    }
+                });
+            }
+        });
+
+        function showCategories(categories) {
+
+            categories.forEach(function (category) {
+                var $div=$('div[id^="category"]:last');
+
+                var num = parseInt($div.prop("id").match(/\d+/g), 10) + 1;
+
+                var $klon = $div.clone().prop('id', 'category' + num);
+                $klon.find('#connectionWithCategory').prop('href','/category/'+category.id);
+                $klon.find('#categoryName').text(category.name)
+                $('#categoryContainer').append($klon);
+            })
+
+        }
+    </script>
+</nav>

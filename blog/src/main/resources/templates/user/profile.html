@@ -1,0 +1,16 @@
+<main>
+    <div class="container body-container">
+
+        <div class="row">
+            <div id="main" class="col-sm-9">
+                <div>
+                    <img style="width: 400px;height: 300px;" alt="user picture" th:src="@{'data:image/png;base64,' + ${user.picture}}" />
+                    <br/>
+                    Email: <span th:text="${user.email}"></span>
+                    <br/>
+                    <span th:text="${user.fullName}"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
